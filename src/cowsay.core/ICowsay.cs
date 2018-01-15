@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace cowsay.core
-{
-    public interface ICowsay
-    {
+﻿namespace cowsay.core {
+    public interface ICowsay {
+        string Version();
+        string SayMessage(string message);
     }
 }

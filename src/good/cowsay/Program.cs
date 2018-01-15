@@ -1,4 +1,5 @@
 ﻿using System;
+using cowsay.core;
 
 namespace cowsay
 {
@@ -6,7 +7,9 @@ namespace cowsay
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ICowsay cowsay = new Cowsay();
+            //Console.WriteLine(cowsay.SayMessage("Hi"));
+            Console.ReadKey();
         }
     }
 }
