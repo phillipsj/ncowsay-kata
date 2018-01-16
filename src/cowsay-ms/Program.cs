@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace cowsay
+namespace cowsay_ms
 {
     class Program
     {

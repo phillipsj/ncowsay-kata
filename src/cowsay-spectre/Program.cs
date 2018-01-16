@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace cowsay
+namespace cowsay_spectre
 {
     class Program
     {
