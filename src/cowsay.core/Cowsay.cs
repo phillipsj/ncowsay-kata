@@ -17,7 +17,7 @@ namespace cowsay.core {
 
         public string Version() {
             var builder = new StringBuilder();
-            builder.AppendLine($"nCowsay version {_version}");
+            builder.AppendLine(GenerateMessageBubble($"nCowsay version {_version}"));
             builder.Append(GenerateCow(_defaultEyes, _defaultTongue));
             return builder.ToString();
         }
@@ -48,7 +48,7 @@ namespace cowsay.core {
 
             foreach (var index in Enumerable.Range(0, lines.Count)) {
                 var delemiters = DetermineMessageBubbleDelimiters(index, lines.Count);
-                builder.AppendLine(GenearteMessageBubbleLine(lineWidth, delemiters, message));
+                builder.AppendLine(GenearteMessageBubbleLine(lineWidth, delemiters, $" {lines[index]} "));
             }
 
             builder.AppendLine(GenerateMessageBubbleBoundaryLine(lineWidth, '-'));
