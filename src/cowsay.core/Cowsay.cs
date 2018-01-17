@@ -4,37 +4,34 @@ using System.Text;
 
 namespace cowsay.core {
     public class Cowsay : ICowsay {
-        private readonly string _defaultEyes;
-        private readonly string _defaultTongue;
         private readonly int _bubbleWidth;
-        private readonly string _version = "0.1.0";
+        private readonly string _version;
 
         public Cowsay() {
-            _defaultEyes = "oo";
-            _defaultTongue = " ";
             _bubbleWidth = 40;
+            _version = "0.1.0";
         }
 
-        public string Version() {
+        public string GetVersion() {
             var builder = new StringBuilder();
             builder.AppendLine(GenerateMessageBubble($"nCowsay version {_version}"));
-            builder.Append(GenerateCow(_defaultEyes, _defaultTongue));
+            builder.Append(GenerateCow(ModeSettings.FindMode(Modes.Default)));
             return builder.ToString();
         }
 
-        public string SayMessage(string message) {
+        public string GetCow(string message, Modes mode = Modes.Default) {
             var builder = new StringBuilder();
             builder.Append(GenerateMessageBubble(message));
-            builder.Append(GenerateCow(_defaultEyes, _defaultTongue));
+            builder.Append(GenerateCow(ModeSettings.FindMode(mode)));
             return builder.ToString();
         }
 
-        private string GenerateCow(string eyes, string tongue) {
+        private string GenerateCow(ModeSetting settings) {
             var builder = new StringBuilder();
             builder.AppendLine("      \\  ^__^             ");
-            builder.AppendLine($"       \\ ({eyes})\\________    ");
+            builder.AppendLine($"       \\ ({settings.Eyes})\\________    ");
             builder.AppendLine("         (__)\\        )\\/\\");
-            builder.AppendLine($"         {tongue}    ||----w |   ");
+            builder.AppendLine($"         {settings.Tongue}    ||----w |   ");
             builder.AppendLine("              ||     ||   ");
             return builder.ToString();
         }
@@ -93,11 +90,7 @@ namespace cowsay.core {
                 else {
                     var splitWords = Enumerable.Range(0, longWord.Length / _bubbleWidth)
                         .Select(x => longWord.Substring(x * _bubbleWidth, _bubbleWidth));
-                    foreach (var splitWord in splitWords) {
-                        if (!string.IsNullOrWhiteSpace(splitWord)) {
-                            words.Add(splitWord);
-                        }
-                    }
+                    words.AddRange(splitWords.Where(splitWord => !string.IsNullOrWhiteSpace(splitWord)));
                 }
             }
 

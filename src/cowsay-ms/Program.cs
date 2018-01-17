@@ -19,7 +19,7 @@ namespace cowsay_ms
                     text = target.Argument(
                         "say",
                         "Prints the given text to the console as if a cow had said it."));
-            commandLineApplication.VersionOption("-v | --version", () => cowsay.Version());
+            commandLineApplication.VersionOption("-v | --version", () => cowsay.GetVersion());
             commandLineApplication.HelpOption("-? | -h | --help");
             commandLineApplication.OnExecute(() =>
             {

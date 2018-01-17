@@ -1,6 +1,6 @@
 ﻿namespace cowsay.core {
     public interface ICowsay {
-        string Version();
-        string SayMessage(string message);
+        string GetVersion();
+        string GetCow(string message, Modes mode = Modes.Default);
     }
 }
